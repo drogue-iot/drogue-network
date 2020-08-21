@@ -10,6 +10,7 @@ pub use dns::{Dns, AddrType};
 pub use no_std_net::{IpAddr, Ipv4Addr, Ipv6Addr, SocketAddr, SocketAddrV4, SocketAddrV6};
 
 /// Whether a socket should block when a read/write can't be performed, or return early.
+#[derive(Debug)]
 pub enum Mode {
 	/// The function call will wait as long as necessary to complete the operation
 	Blocking,
