@@ -11,6 +11,7 @@ use heapless::{
     String,
     consts::U256,
 };
+use core::str::FromStr;
 
 #[derive(Debug)]
 pub struct HostAddr {
@@ -19,7 +20,6 @@ pub struct HostAddr {
 }
 
 impl HostAddr {
-
     pub fn new(ip: IpAddr, hostname: Option<String<U256>>) -> Self {
         HostAddr {
             ip,
@@ -50,6 +50,20 @@ impl HostAddr {
     }
 }
 
+#[derive(Debug)]
+pub struct AddrParseError;
+
+impl FromStr for HostAddr {
+    type Err = AddrParseError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        Ok(HostAddr::new(
+            IpAddr::from_str(s).map_err(|_| AddrParseError)?,
+            Some(String::from_str(s).unwrap()),
+        ))
+    }
+}
+
 impl From<IpAddr> for HostAddr {
     fn from(ip: IpAddr) -> Self {
         HostAddr {
@@ -71,6 +85,13 @@ impl HostSocketAddr {
             addr,
             port,
         }
+    }
+
+    pub fn from(addr: &str, port: u16) -> Result<HostSocketAddr, AddrParseError> {
+        Ok( Self::new(
+            HostAddr::from_str(addr)?,
+            port
+        ) )
     }
 
     pub fn addr(&self) -> &HostAddr {
