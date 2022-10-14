@@ -8,8 +8,8 @@ use core::fmt::Debug;
 /// DNS errors
 #[derive(Debug)]
 pub enum DnsError {
-    UnsupportedAddressType,
-    NoSuchHost,
+	UnsupportedAddressType,
+	NoSuchHost,
 }
 
 /// This is the host address type to be returned by `gethostbyname`.
@@ -18,12 +18,12 @@ pub enum DnsError {
 /// will look for `AAAA` records
 #[derive(Clone, Debug, PartialEq)]
 pub enum AddrType {
-    /// Result is `A` record
-    IPv4,
-    /// Result is `AAAA` record
-    IPv6,
-    /// Result is either a `A` record, or a `AAAA` record
-    Either,
+	/// Result is `A` record
+	IPv4,
+	/// Result is `AAAA` record
+	IPv6,
+	/// Result is either a `A` record, or a `AAAA` record
+	Either,
 }
 
 /// This trait is an extension trait for [`TcpStack`] and [`UdpStack`] for dns
@@ -37,18 +37,18 @@ pub enum AddrType {
 /// [`ToSocketAddrs`]:
 /// https://doc.rust-lang.org/std/net/trait.ToSocketAddrs.html
 pub trait Dns {
-    /// The type returned when we have an error
-    type Error: Into<DnsError> + Debug;
+	/// The type returned when we have an error
+	type Error: Into<DnsError> + Debug;
 
-    /// Resolve the first ip address of a host, given its hostname and a desired
-    /// address record type to look for
-    fn gethostbyname(&self, hostname: &str, addr_type: AddrType) -> Result<HostAddr, Self::Error>;
+	/// Resolve the first ip address of a host, given its hostname and a desired
+	/// address record type to look for
+	fn gethostbyname(&self, hostname: &str, addr_type: AddrType) -> Result<HostAddr, Self::Error>;
 
-    /// Resolve the hostname of a host, given its ip address
-    ///
-    /// **Note**: A fully qualified domain name (FQDN), has a maximum length of
-    /// 255 bytes [`rfc1035`]
-    ///
-    /// [`rfc1035`]: https://tools.ietf.org/html/rfc1035
-    fn gethostbyaddr(&self, addr: IpAddr) -> Result<String<consts::U256>, Self::Error>;
+	/// Resolve the hostname of a host, given its ip address
+	///
+	/// **Note**: A fully qualified domain name (FQDN), has a maximum length of
+	/// 255 bytes [`rfc1035`]
+	///
+	/// [`rfc1035`]: https://tools.ietf.org/html/rfc1035
+	fn gethostbyaddr(&self, addr: IpAddr) -> Result<String<consts::U256>, Self::Error>;
 }
