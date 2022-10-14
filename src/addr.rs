@@ -1,16 +1,16 @@
 pub use no_std_net::{IpAddr, Ipv4Addr, Ipv6Addr, SocketAddr, SocketAddrV4, SocketAddrV6};
 
 use core::str::FromStr;
-use heapless::{consts::U256, String};
+use heapless::String;
 
 #[derive(Debug)]
 pub struct HostAddr {
 	ip: IpAddr,
-	hostname: Option<String<U256>>,
+	hostname: Option<String<256>>,
 }
 
 impl HostAddr {
-	pub fn new(ip: IpAddr, hostname: Option<String<U256>>) -> Self {
+	pub fn new(ip: IpAddr, hostname: Option<String<256>>) -> Self {
 		HostAddr { ip, hostname }
 	}
 
@@ -32,7 +32,7 @@ impl HostAddr {
 		self.ip
 	}
 
-	pub fn hostname(&self) -> Option<&String<U256>> {
+	pub fn hostname(&self) -> Option<&String<256>> {
 		self.hostname.as_ref()
 	}
 }

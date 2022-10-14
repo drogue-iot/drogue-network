@@ -1,4 +1,4 @@
-use heapless::{consts, String};
+use heapless::String;
 
 use crate::addr::HostAddr;
 use no_std_net::IpAddr;
@@ -50,5 +50,5 @@ pub trait Dns {
 	/// 255 bytes [`rfc1035`]
 	///
 	/// [`rfc1035`]: https://tools.ietf.org/html/rfc1035
-	fn gethostbyaddr(&self, addr: IpAddr) -> Result<String<consts::U256>, Self::Error>;
+	fn gethostbyaddr(&self, addr: IpAddr) -> Result<String<256>, Self::Error>;
 }

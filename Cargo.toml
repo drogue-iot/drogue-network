@@ -11,4 +11,4 @@ license = "Apache-2.0"
 [dependencies]
 nb = "1"
 no-std-net = "0.4"
-heapless = "^0.5"
+heapless = "^0.7"
