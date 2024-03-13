@@ -85,5 +85,3 @@ pub trait UdpStack {
     /// Close an existing UDP socket.
     fn close(&self, socket: Self::UdpSocket) -> Result<(), Self::Error>;
 }
-
-// End Of File

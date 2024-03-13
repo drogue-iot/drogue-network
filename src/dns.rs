@@ -6,7 +6,7 @@ use no_std_net::IpAddr;
 use core::fmt::Debug;
 
 /// DNS errors
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum DnsError {
 	UnsupportedAddressType,
 	NoSuchHost,
@@ -16,7 +16,7 @@ pub enum DnsError {
 ///
 /// An IPv4 address type always looks for `A` records, while IPv6 address type
 /// will look for `AAAA` records
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum AddrType {
 	/// Result is `A` record
 	IPv4,

@@ -14,7 +14,7 @@ pub enum Mode {
 
 /// Network errors
 #[non_exhaustive]
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum TcpError {
 	NoAvailableSockets,
 	ConnectionRefused,
@@ -27,7 +27,7 @@ pub enum TcpError {
 }
 
 #[non_exhaustive]
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum TcpImplError {
 	InitializationError,
 	ErrorCode(u32),
