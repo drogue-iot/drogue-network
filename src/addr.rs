@@ -3,7 +3,7 @@ pub use no_std_net::{IpAddr, Ipv4Addr, Ipv6Addr, SocketAddr, SocketAddrV4, Socke
 use core::str::FromStr;
 use heapless::String;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct HostAddr {
 	ip: IpAddr,
 	hostname: Option<String<256>>,
@@ -37,7 +37,7 @@ impl HostAddr {
 	}
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct AddrParseError;
 
 impl FromStr for HostAddr {
@@ -57,7 +57,7 @@ impl From<IpAddr> for HostAddr {
 	}
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct HostSocketAddr {
 	addr: HostAddr,
 	port: u16,
